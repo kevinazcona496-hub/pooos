@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Me perdonas?</title>
+<style>
+  body {
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    background-color: #f3f3f3;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-top: 20px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  button {
+    padding: 10px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #yesBtn {
+    background-color: green;
+    color: white;
+  }
+
+  #noBtn {
+    background-color: red;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<h1>¿Me perdonas por dejarte en visto??</h1>
+<div class="buttons">
+  <button id="yesBtn">Sí</button>
+  <button id="noBtn">No</button>
+</div>
+
+<script>
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const title = document.querySelector("h1");
+
+  const frases = [
+    "Por favor 🙏",
+    "¿Segura?",
+    "¿Ni un poquito?",
+    "Pensalo 😢",
+    "¿100% segura?",
+    "Dale perdoname 😭",
+    "Porfa 🥺",
+    "¿Tan mal estuve?",
+    "Pls 😿",
+    "¿Y si me porto bien?",
+    "Última chance 😔",
+    "¿No querés entonces?",
+    "¿Tan corazón frío?",
+    "Me duele 😩",
+    "😭😭😭",
+    "Ok... 💔",
+    "Noo 😭",
+    "Dalee 🙏",
+    "¿En serio?",
+    "¿Segurísima?"
+  ];
+
+  let fraseIndex = 0;
+  let yesSize = 1;
+  let noSize = 1;
+  let clicks = 0;
+
+  yesBtn.addEventListener("click", () => {
+    title.textContent = "Gracias x perdonarme te amo :3";
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+  });
+
+  noBtn.addEventListener("click", () => {
+    noBtn.textContent = frases[fraseIndex];
+    fraseIndex = (fraseIndex + 1) % frases.length;
+
+    clicks++;
+
+    // botón verde crece rápido, botón rojo se achica más despacio
+    yesSize += 0.2;
+    noSize -= 0.045;
+
+    if (noSize < 0.05) noSize = 0.05;
+    if (yesSize > 10) yesSize = 10;
+
+    yesBtn.style.transform = `scale(${yesSize})`;
+    noBtn.style.transform = `scale(${noSize})`;
+
+    if (clicks >= 20) {
+      noBtn.disabled = true;
+      noBtn.style.cursor = "default";
+      noBtn.textContent = "Ok 💔";
+    }
+  });
+</script>
+
+</body>
+</html>
